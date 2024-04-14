@@ -3,9 +3,6 @@
 namespace Util;
 use PDO;
 
-/**
- * Classe per gestire la connessione al database
- */
 class Connection{
     private static PDO $pdo;
 
@@ -13,9 +10,6 @@ class Connection{
     {
     }
 
-    /**
-     * @return PDO
-     */
     public static function getInstance(): PDO
     {
         if (!isset(Connection::$pdo))
