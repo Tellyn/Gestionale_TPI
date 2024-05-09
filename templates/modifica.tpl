@@ -22,6 +22,7 @@
     <br>
     <input type="submit">
 </form>
+<button onclick='back()'>indietro</button>
 </body>
 <script>
 
@@ -87,6 +88,8 @@ function controlloore(){
         // Se tutti i controlli passano, il modulo può essere inviato
         return true;
 }
-   
+   function back(){
+    window.location.href='index.php'
+   }
 </script>
 </html>

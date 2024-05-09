@@ -25,8 +25,13 @@ if(isset($_GET['action'])){
 
     if($_GET['action'] == 'complete_registration') {
         $user=Authenticator::getUser();
+        if(\Model\UserRepository::getUser($_POST['username'])!=null){
+                echo '<script>alert("email già utilizzata!");</script>';
+                echo $template->render('registrazione');
+                exit(0);
+        }
         $pass=password_hash($_POST['password'], PASSWORD_DEFAULT);
-       \Model\UserRepository::insertUser($_POST['username'], $pass, $_POST['nome'], $_POST['cognome'], $_POST['telefono'],$_POST['data']);
+        \Model\UserRepository::insertUser($_POST['username'], $pass, $_POST['nome'], $_POST['cognome'], $_POST['telefono'],$_POST['data']);
        $t=true;
     }
     if($_GET['action'] == 'erase') {
@@ -74,12 +79,11 @@ if(isset($_POST['inizio_turno'])){
 if(!$t){
     $user=Authenticator::getUser();
 }
-
 if($user == null){
     echo $template->render('index');
     exit(0);
 }
-if($user['ruolo']=='Admin'){
+if($user['ruolo']=='admin'){
     //mail('nicolasmantelli05@gmail.com','hello','sei loggato','From:gestionale@try.com');
         $presenze=AttendanceRepository::getpresenze();
 

@@ -41,5 +41,19 @@ class UserRepository{
         ]);
 
     }
+    public static function getUser(string $username){
+            $pdo = Connection::getInstance();
+        $sql = 'SELECT * FROM utente WHERE username=:username';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+                'username' => $username
+            ]
+        );
+        if($stmt->rowCount() == 0)
+            return null;
+        else
+            return $row = $stmt->fetch();
+    }
+    
 
 }

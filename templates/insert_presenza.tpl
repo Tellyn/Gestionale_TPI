@@ -22,6 +22,8 @@
     <input type="submit" >
     <button onclick="prova()">prova</button>
 </form>
+<button onclick='back()'>indietro</button>
+
 </body>
 <script>
 function myentrata(){
@@ -88,5 +90,8 @@ function controlloore(){
         return true;
     }
    
+   function back(){
+    window.location.href='index.php'
+   }
 </script>
 </html>
