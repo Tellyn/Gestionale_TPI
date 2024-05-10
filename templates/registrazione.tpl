@@ -5,10 +5,66 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>
+    <title>Registrazione
     </title>
+    <style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #007bff;
+}
+
+form {
+    width: 300px; /* larghezza desiderata del modulo */
+    margin: 0 auto; /* centra il modulo orizzontalmente */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"],
+input[type="date"] {
+    width: calc(100% - 16px);
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="submit"],
+button {
+    width: 40%;
+    padding: 8px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover,
+button:hover {
+    background-color: #0056b3;
+}
+
+button {
+    margin-top: 10px;
+}
+
+    </style>
 </head>
 <body>
+<h1>Registrazione</h1>
 <form method="post" action="index.php?action=complete_registration" onsubmit='return controllo()'> 
     <input name="username" type="email" placeholder="Email" required>
     <input name="password" id='password' type="password" placeholder="Password" required>
@@ -19,8 +75,9 @@
     <input name="data" type="date" placeholder="" required>
     <br>
     <input type="submit">
+    <button onclick='back()'>indietro</button>
+
 </form>
-<button onclick='back()'>indietro</button>
 
 </body>
 <script>

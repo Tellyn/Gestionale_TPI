@@ -39,7 +39,6 @@ if(isset($_GET['action'])){
     }
     if($_GET['action'] == 'change') {
         $change=AttendanceRepository::getpresenza($_POST['change']);
-        var_dump($change);
         echo $template->render('modifica', [
             'change' => $change[0]
         ]);
