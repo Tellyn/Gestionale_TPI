@@ -122,14 +122,13 @@
 <div class="clock" id="clock"></div> <!-- Orologio -->
 
 <div class="button-container">
-    <button  onclick="registrazione()">Registrazione</button>
-    <button onclick='aggiungi()' id="aggiungi">Aggiungi</button>
+    <button  onclick="registrazione()">Registra un nuovo utente</button>
 </div>
 <table>
-    <?php if($presenze==null) :?>
+    <?php if($giorno==null) :?>
     <h2>Nessun Risultato</h2>
     <?php else : ?>
-    <tr><th>Utente</th><th>Giorno</th><th>Inizio_turno</th><th> Fine_turno</th><th> Entrata </th> <th> Uscita </th> <th> descrizione </th><th>cancella</th><th>modifica</th></tr>
+    <tr><th>Utente</th><th>Giorno</th><th>Inizio_turno</th><th> Fine_turno</th><th>cancella</th><th>modifica</th></tr>
     <?php foreach($presenze as $presenza) : ?>
     <tr>
         <td>
@@ -146,25 +145,7 @@
             <?=$presenza['fine_turno']?>
         </td>
         <td>
-            <?php if($presenza['entrata']=='00:00:00') : ?>
-            Nessuna entrata
-            <?php else: ?>
-            <?= $presenza['entrata']?>
-            <?php endif; ?>
-
-        </td>
-        <td>
-            <?php if($presenza['uscita']=='00:00:00') : ?>
-            Nessuna uscita
-            <?php else: ?>
-            <?= $presenza['uscita']?>
-            <?php endif; ?>
-        </td>
-        <td>
-            <?= $presenza['descrizione']?>
-        </td>
-        <td>
-            <form method="post" action="index.php?action=erase" style="display: inline-block">
+            <form method="post" action="index.php?action=erase" style="display: inline-block" onsubmit="return prova()">
             <button>cancella</button>
                 <input type="hidden" value="<?=$presenza['ID']?>" name="erase">
             </form>
@@ -185,9 +166,7 @@
     function logout(){
 window.location.href='index.php?action=logout'
 }
-function aggiungi(){
-window.location.href='index.php?action=insert'
-}
+
 </script>
 <script>
 // Funzione per aggiornare l'orologio digitale

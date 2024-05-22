@@ -8,15 +8,25 @@ CREATE TABLE Utente (
                         numero_telefono VARCHAR(20),
                         ruolo VARCHAR(20)
 );
-CREATE TABLE Presenza (
-                          ID INT UNSIGNED PRIMARY KEY AUTO_INCREMENT UNIQUE,
-                          id_Utente INT unsigned,
-                          inizio_turno TIME,
-                          fine_turno TIME,
-                          entrata TIME,
-                          uscita TIME,
-                          giorno DATE,
-                          descrizione text,
-                          FOREIGN KEY (Id_Utente) REFERENCES Utente(ID)
-);
 
+CREATE TABLE Giorno (
+    ID INT UNSIGNED PRIMARY KEY AUTO_INCREMENT UNIQUE,
+    giorno DATE,
+    inizio_turno TIME,
+    fine_turno TIME,
+    id_utente INT UNSIGNED,
+    FOREIGN KEY (id_utente) REFERENCES Utente(ID)
+);
+CREATE TABLE Entrata (
+    ID INT UNSIGNED PRIMARY KEY AUTO_INCREMENT UNIQUE,
+    orario_entrata TIME
+);
+CREATE TABLE Uscita (
+    ID INT UNSIGNED PRIMARY KEY AUTO_INCREMENT UNIQUE,
+    orario_uscita TIME,
+    motivo VARCHAR(50),
+    id_giorno INT UNSIGNED,
+    id_entrata INT UNSIGNED,
+    FOREIGN KEY (id_giorno) REFERENCES Giorno(ID),
+    FOREIGN KEY (id_entrata) REFERENCES Entrata(ID)
+);

@@ -13,11 +13,6 @@ if(isset($_GET['action'])){
         exit(0);
     }
 
-    if($_GET['action'] == 'insert') {
-        echo $template->render('insert_presenza');
-        exit(0);
-    }
-
     if($_GET['action'] == 'logout') {
         \Util\Authenticator::logout();
     }
@@ -44,46 +39,22 @@ if(isset($_GET['action'])){
         ]);
         exit(0);
     }
-    if($_GET['action']== 'modifica'){
-        if(!isset($_POST['entrata'])){
-            $entrata='';
-        }else{
-            $entrata=$_POST['entrata'];
-        }
-        if(!isset($_POST['uscita'])){
-            $uscita='';
-        }else{
-            $uscita=$_POST['uscita'];
-        }
-    \Model\AttendanceRepository::updatepresenza($_POST['inizio_turno'],$_POST['fine_turno'],$entrata,$uscita,$_POST['descrizione'],$_POST['giorno'],$_POST['id']);
-    unset($_POST['inizio_turno']);
+    
+    if( $_GET['action']=='giorno'){
+        Model\DayRepository::insert_giorno();    
     }
 
-}
-if(isset($_POST['inizio_turno'])){
-
-    if(!isset($_POST['entrata'])){
-        $entrata='';
-    }else{
-        $entrata=$_POST['entrata'];
-    }
-    if(!isset($_POST['uscita'])){
-        $uscita='';
-    }else{
-        $uscita=$_POST['uscita'];
-    }
-    \Model\AttendanceRepository::insertpresenza($_POST['inizio_turno'],$_POST['fine_turno'],$entrata,$uscita,$_POST['descrizione'],$_POST['giorno']);
-    unset($_POST['inizio_turno']);
 }
 if(!$t){
     $user=Authenticator::getUser();
 }
+
 if($user == null){
-    echo $template->render('index');
+    echo $template->render('index',[
+    ]);
     exit(0);
 }
 if($user['ruolo']=='admin'){
-    //mail('nicolasmantelli05@gmail.com','hello','sei loggato','From:gestionale@try.com');
         $presenze=AttendanceRepository::getpresenze();
 
     echo $template->render('home_admin',[
@@ -91,9 +62,8 @@ if($user['ruolo']=='admin'){
     ]);
     exit(0);
 }
-$presenze = AttendanceRepository::getpresenza_utente();
-
+$giorno=Model\DayRepository::get_giorno();
+$giorni=Model\DayRepository::get_giorni();
 echo $template->render('home', [
-'presenze' => $presenze,
-
+    'giorno'=>$giorno
 ]);

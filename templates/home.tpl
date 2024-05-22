@@ -121,49 +121,46 @@
 
 <div class="clock" id="clock"></div> <!-- Orologio -->
 
-<div class="button-container">
-    <button onclick='aggiungi()' id="aggiungi">Aggiungi</button>
+<div class="button-container" id="button">
+    <?php if($giorno===true) :?>
+    <button onclick='aggiungi()' id="aggiungi">Aggiungi una giornata di lavoro</button>
+    <?php else : ?>
+    <button onclick='uscita()' id="uscita">Aggiungi un'uscita</button>
+    <button onclick='entrata()' id="entrata">Aggiungi un'entrata</button>
+    <?php endif; ?>
 </div>
-
+<h2>OGGI:</h2>
 <table>
 <thead>
-<?php if($presenze==null) :?>
-    <h2>Nessun Risultato</h2>
+<?php if($giorno===true) :?>
+    <h2>Devi ancora aggiungere la giornata</h2>
 <?php else : ?>
-<tr><th>Giorno</th><th>Inizio turno</th><th>Fine turno</th><th>Entrata</th> <th>Uscita</th> <th>Descrizione</th><th>cancella</th><th>modifica</th></tr>
-<?php foreach($presenze as $presenza) : ?>
+<tr><th>Giorno</th><th>Inizio turno</th><th>Fine turno</th><th>cancella</th></tr>
 <tr>
-    <td><?=$presenza['giorno']?></td>
-    <td><?=$presenza['inizio_turno']?></td>
-    <td><?=$presenza['fine_turno']?></td>
-    <td><?php if($presenza['entrata']=='00:00:00') : ?>Nessuna entrata<?php else: ?><?= $presenza['entrata']?><?php endif; ?></td>
-    <td><?php if($presenza['uscita']=='00:00:00') : ?>Nessuna uscita<?php else: ?><?= $presenza['uscita']?><?php endif; ?></td>
-    <td><?= $presenza['descrizione']?></td>
+    <td><?=$giorno['giorno']?></td>
+    <td><?=$giorno['inizio_turno']?></td>
+    <td><?=$giorno['fine_turno']?></td>
     <td>
         <form method="post" action="index.php?action=erase" style="display: inline-block">
             <button>cancella</button>
-            <input type="hidden" value="<?=$presenza['ID']?>" name="erase">
-        </form>
-    </td>
-    <td>
-        <form method="post" action="index.php?action=change" style="display: inline-block;">
-            <button>modifica</button>
-            <input type="hidden" value="<?=$presenza['ID']?>" name="change">
+            <input type="hidden" value="" name="erase">
         </form>
     </td>
 </tr>
-<?php endforeach; ?>
 <?php endif; ?>
 </thead>
 </table>
 <script>
 function aggiungi(){
-window.location.href='index.php?action=insert'
+window.location.href='index.php?action=giorno'
 }
 function logout(){
 window.location.href='index.php?action=logout'
 }
 </script>
+
+
+
 <script>
 // Funzione per aggiornare l'orologio digitale
 function updateClock() {
