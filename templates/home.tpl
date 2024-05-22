@@ -126,7 +126,7 @@
     <button onclick='aggiungi()' id="aggiungi">Aggiungi una giornata di lavoro</button>
     <?php else : ?>
     <button onclick='uscita()' id="uscita">Aggiungi un'uscita</button>
-    <button onclick='entrata()' id="entrata">Aggiungi un'entrata</button>
+
     <?php endif; ?>
 </div>
 <h2>OGGI:</h2>
@@ -141,10 +141,10 @@
     <td><?=$giorno['inizio_turno']?></td>
     <td><?=$giorno['fine_turno']?></td>
     <td>
-        <form method="post" action="index.php?action=erase" style="display: inline-block">
+       <!--  <form method="post" action="index.php?action=erase" style="display: inline-block">
             <button>cancella</button>
             <input type="hidden" value="" name="erase">
-        </form>
+        </form> -->
     </td>
 </tr>
 <?php endif; ?>
@@ -156,6 +156,9 @@ window.location.href='index.php?action=giorno'
 }
 function logout(){
 window.location.href='index.php?action=logout'
+}
+function uscita(){
+    window.location.href='index.php?action=uscita'
 }
 </script>
 

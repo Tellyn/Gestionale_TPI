@@ -1,7 +1,6 @@
 <?php
 namespace Model;
 
-use League\Plates\Template\Data;
 use Util\Connection;
 use Util\Authenticator;
 class DayRepository 

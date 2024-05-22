@@ -64,7 +64,7 @@ input[type="submit"]:hover {
     </style>
 </head>
 <body>
-    <h1 class="title">Gestione Entrare</h1>
+    <h1 class="title">Gestione Entrate</h1>
      <p class="subtitle">Mantelli Nicolas, Orizio Simone, Sinisterra Boya Gabriel</p>
     <div class="container">
         <form action="index.php" method="post">

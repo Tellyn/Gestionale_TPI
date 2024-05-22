@@ -32,12 +32,9 @@ if(isset($_GET['action'])){
     if($_GET['action'] == 'erase') {
         AttendanceRepository::deletepresenza($_POST['erase']);
     }
-    if($_GET['action'] == 'change') {
-        $change=AttendanceRepository::getpresenza($_POST['change']);
-        echo $template->render('modifica', [
-            'change' => $change[0]
-        ]);
-        exit(0);
+    if($_GET['action']=='uscita'){
+        Model\EnterExitRepository::insert_uscita();
+        var_dump(Model\EnterExitRepository::get_last_uscita());
     }
     
     if( $_GET['action']=='giorno'){
