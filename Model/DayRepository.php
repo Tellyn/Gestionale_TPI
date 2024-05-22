@@ -37,7 +37,7 @@ class DayRepository
         if($stmt->rowCount() == 0)
             return true;
 
-     return $stmt->fetch();
+        return $stmt->fetch();
     }
 public static function get_giorni() {
     $user=Authenticator::getUser();
@@ -52,5 +52,18 @@ public static function get_giorni() {
         }
         $result=$stmt->fetchAll();
         return $result;
+}
+public static function get_giornoById(string $giorno){
+        $user=Authenticator::getUser();
+        $pdo = Connection::getInstance();
+        $sql = 'SELECT * FROM Giorno WHERE ID=:giorno  AND id_utente= :utente';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            'giorno'=>$giorno,
+            'utente'=>$user['ID']
+            ]
+        );
+    
+        return $stmt->fetch();
 }
 }

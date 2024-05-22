@@ -127,30 +127,22 @@
     </div>
 </header>
 
-<div class="clock" id="clock"></div> <!-- Orologio -->
 
 <div class="button-container">
-    <button onclick="change()">Resoconto degli altri giorni</button>
+    <button onclick="back()">Torna ad oggi</button>
 </div>
-<div class="button-container" id="button">
-    <?php if($giorno===true) :?>
-    <button onclick='aggiungi()' id="aggiungi">Aggiungi una giornata di lavoro</button>
-    <?php elseif($entrata===false) : ?>
-    <button onclick='uscita()' id="uscita">Aggiungi un'uscita</button>
-    <?php else :?>
-    <button onclick='entrata()' id="entrata">Aggiungi un'entrata</button>
-    <?php endif; ?>
-</div>
-<h2>OGGI:</h2>
+<h2>Lista di tutti i giorni:</h2>
+<h3 style="text-align: center;">Premi per la riga della tabella per visualizzare le informazioni dei giorni</h3>
 <table>
 <thead>
-<?php if($giorno===true) :?>
-    <h2>Devi ancora aggiungere la giornata</h2>
+<?php if($giorni===null) :?>
+    <h2>Nessun risultato</h2>
 <?php else : ?>
-<tr><th>Giorno</th><th>Inizio turno</th><th>Fine turno</th><th>cancella</th></tr>
+<tr><th>Giorno</th><th>Inizio turno</th><th>Fine turno</th></tr>
 </thead>
+<?php foreach($giorni as $giorno) : ?>
 
-<tr>
+<tr onclick="change(<?=$giorno['ID']?>)" >
     <td><?=$giorno['giorno']?></td>
     <td><?=$giorno['inizio_turno']?></td>
     <td><?=$giorno['fine_turno']?></td>
@@ -161,66 +153,22 @@
         </form> -->
     </td>
 </tr>
-</table>
-<table class="tabellaEntrate">
-    <thead>
-        <?php if($presenze===null) : ?>
-        <h2>Nessuna uscita presente</h2>
-        <?php else : ?>
-        <tr><th>Uscita</th><th>Entrata</th></tr>
-    </thead>
-    <?php foreach($presenze as $presenza) : ?>
-    <tr>
-        <td>
-            <?=$presenza['orario_uscita']?>
-        </td>
-        <td>
-        <?=$presenza['orario_entrata']?>    
-        </td>
-    </tr>
-    <?php endforeach; ?>
-    <?php endif; ?>
-
+<?php endforeach; ?>
 </table>
 <?php endif; ?>
 
 <script>
-function aggiungi(){
-window.location.href='index.php?action=giorno'
-}
-
 function logout(){
 window.location.href='index.php?action=logout'
 }
-
-function uscita(){
-    window.location.href='index.php?action=uscita'
+function back(){
+    window.location.href='index.php'
 }
+function change(value){
+    window.location.href='index.php?action=open&id='+value
 
-function entrata(){
-    window.location.href='index.php?action=entrata'
-}
-
-function change(){
-    window.location.href='index.php?action=all'
 }
 </script>
 
-
-
-<script>
-// Funzione per aggiornare l'orologio digitale
-function updateClock() {
-    const now = new Date();
-    const hours = now.getHours().toString().padStart(2, '0');
-    const minutes = now.getMinutes().toString().padStart(2, '0');
-    const seconds = now.getSeconds().toString().padStart(2, '0');
-    const timeString = `${hours}:${minutes}:${seconds}`;
-    document.getElementById('clock').textContent = timeString;
-}
-
-// Aggiorna l'orologio ogni secondo
-setInterval(updateClock, 1000);
-</script>
 </body>
 </html>
