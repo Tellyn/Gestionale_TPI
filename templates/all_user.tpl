@@ -66,6 +66,14 @@
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+        .tabellaEntrate{
+            text-align: center;
+            width: 60%;
+            margin: 0 auto 20px auto; /* Centra la tabella orizzontalmente */
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
         th, td {
             padding: 10px;
             border-bottom: 1px solid #ddd;
@@ -119,62 +127,50 @@
     </div>
 </header>
 
-<div class="clock" id="clock"></div> <!-- Orologio -->
 
 <div class="button-container">
-    <button  onclick="registrazione()">Registra un nuovo utente</button>
-    <button onclick="user()">Visualizza tutti gli utenti</button>
+    <button onclick="back()">torna indietro</button>
 </div>
-
-<?php if($giorni==null) :?>
-    <h2>Nessun risultato</h2>
+<h2>Lista di tutti gli utenti:</h2>
+<h3 style="text-align: center;">Premi la riga della tabella per visualizzare le informazioni degli utenti</h3>
+<table>
+<thead>
+<?php if($utenti===null) :?>
+    <h2>Nessun Utente</h2>
 <?php else : ?>
-<?php foreach($giorni as $giorno) : ?>
+<tr><th>Utente</th><th>Email</th><th>Numero di telefono</th><th>Ruolo</th></tr>
+</thead>
+<?php foreach($utenti as $utente) : ?>
 
-    <h2><?=$giorno['nome']?></h2>
-    <table>
-    <thead>
-    <tr><th>Giorno</th><th>Inizio turno</th><th>Fine turno</th><th>cancella</th></tr>
-    </thead>
-    <tr>
-    <td><?=$giorno['giorno']?></td>
-    <td><?=$giorno['inizio_turno']?></td>
-    <td><?=$giorno['fine_turno']?></td>
-    <td>
-       <!--  <form method="post" action="index.php?action=erase" style="display: inline-block">
+<tr onclick="change(<?=$utente['ID']?>)" >
+    <td><?=$utente['nome']?><?=$utente['cognome']?></td>
+    <td><?=$utente['username']?></td>
+    <td><?=$utente['numero_telefono']?></td>
+    <td><?=$utente['ruolo']?></td>
+
+    <!-- <td>
+         <form method="post" action="index.php?action=erase" style="display: inline-block">
             <button>cancella</button>
             <input type="hidden" value="" name="erase">
-        </form> -->
-    </td>
+        </form>
+    </td> -->
 </tr>
-
-</table>
 <?php endforeach; ?>
+</table>
 <?php endif; ?>
-<script>
-    function registrazione(){
-        window.location.href= "index.php?action=registration"
-    }
-    function logout(){
-        window.location.href='index.php?action=logout'
-    }
-    function user(){
-        window.location.href='index.php?action=alluser'
-    }
-</script>
-<script>
-// Funzione per aggiornare l'orologio digitale
-function updateClock() {
-    const now = new Date();
-    const hours = now.getHours().toString().padStart(2, '0');
-    const minutes = now.getMinutes().toString().padStart(2, '0');
-    const seconds = now.getSeconds().toString().padStart(2, '0');
-    const timeString = `${hours}:${minutes}:${seconds}`;
-    document.getElementById('clock').textContent = timeString;
-}
 
-// Aggiorna l'orologio ogni secondo
-setInterval(updateClock, 1000);
+<script>
+function logout(){
+window.location.href='index.php?action=logout'
+}
+function back(){
+    window.location.href='index.php'
+}
+function change(value){
+    window.location.href='index.php?action=user&id='+value
+
+}
 </script>
+
 </body>
 </html>

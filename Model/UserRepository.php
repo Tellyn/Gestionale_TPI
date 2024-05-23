@@ -55,5 +55,16 @@ class UserRepository{
             return $row = $stmt->fetch();
     }
     
-
+    public static function getAlluser(){
+        $pdo = Connection::getInstance();
+        $sql = 'SELECT * FROM utente WHERE ruolo <>:admin ';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            'admin'=>"admin"
+        ]);
+        if($stmt->rowCount() == 0)
+            return null;
+        else
+            return $row = $stmt->fetchAll();
+    }
 }

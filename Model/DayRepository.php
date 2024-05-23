@@ -7,7 +7,7 @@ class DayRepository
 {
     public static function insert_giorno(){
         date_default_timezone_set('Europe/Rome');
-        if(self::get_giorno()){
+        if(self::get_giornoUtente()){
         $pdo = Connection::getInstance();
         $user=Authenticator::getUser();
         $giorno=date("Y-m-d");
@@ -22,7 +22,7 @@ class DayRepository
         );
         }
     }
-    public static function get_giorno(){
+    public static function get_giornoUtente(){
         date_default_timezone_set('Europe/Rome');
         $user=Authenticator::getUser();
         $pdo = Connection::getInstance();
@@ -39,8 +39,38 @@ class DayRepository
 
         return $stmt->fetch();
     }
-public static function get_giorni() {
+    public static function get_giorno(){
+        date_default_timezone_set('Europe/Rome');
+        $pdo = Connection::getInstance();
+        $giorno=date("Y-m-d");
+        $sql = 'SELECT * FROM Giorno WHERE giorno=:giorno';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            'giorno'=>$giorno,
+            ]
+        );
+        if($stmt->rowCount() == 0)
+            return true;
+
+        return $stmt->fetch();
+    }
+public static function get_giorni_today(){
     $user=Authenticator::getUser();
+    $pdo = Connection::getInstance();
+    $giorno=self::get_giorno();
+    $sql = 'SELECT * FROM giorno INNER JOIN utente ON id_utente=utente.iD where giorno.giorno= :giorno';
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        'giorno'=>$giorno['giorno']
+    ]);
+    if($stmt->rowCount() <= 0){
+        return null;
+    }
+    $result=$stmt->fetchAll();
+    return $result;
+}
+public static function get_giorniUtente() {
+        $user=Authenticator::getUser();
         $pdo = Connection::getInstance();
         $sql = 'SELECT * FROM giorno WHERE id_utente = :id_utente ORDER BY giorno DESC';
         $stmt = $pdo->prepare($sql);
