@@ -128,11 +128,11 @@
 </header>
 
 <div class="clock" id="clock"></div> <!-- Orologio -->
-
 <div class="button-container">
     <button  onclick="registrazione()">Registra un nuovo utente</button>
     <button onclick="user()">Visualizza tutti gli utenti</button>
 </div>
+<h2> Persone che lavorano oggi:</h2>
 
 <?php if($giorni==null) :?>
     <h2>Nessun risultato</h2>
