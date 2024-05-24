@@ -153,7 +153,7 @@
 <?php foreach($utenti as $utente) : ?>
 
 <tr onclick="change(<?=$utente['ID']?>)" >
-    <td><?=$utente['nome']?><?=$utente['cognome']?></td>
+    <td><?=$utente['nome']?> <?=$utente['cognome']?></td>
     <td><?=$utente['username']?></td>
     <td><?=$utente['numero_telefono']?></td>
     <td><?=$utente['ruolo']?></td>

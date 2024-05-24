@@ -157,19 +157,19 @@
 <?php if($giorno===true) :?>
     <h2>Devi ancora aggiungere la giornata</h2>
 <?php else : ?>
-<tr><th>Giorno</th><th>Inizio turno</th><th>Fine turno</th><th>cancella</th></tr>
+<tr><th>Giorno</th><th>Inizio turno</th><th>Fine turno</th></tr>
 </thead>
 
 <tr>
     <td><?=$giorno['giorno']?></td>
     <td><?=$giorno['inizio_turno']?></td>
     <td><?=$giorno['fine_turno']?></td>
-    <td>
-       <!--  <form method="post" action="index.php?action=erase" style="display: inline-block">
+    <!--<td>
+         <form method="post" action="index.php?action=erase" style="display: inline-block">
             <button>cancella</button>
             <input type="hidden" value="" name="erase">
-        </form> -->
-    </td>
+        </form>
+    </td>-->
 </tr>
 </table>
 <table class="tabellaEntrate">

@@ -138,9 +138,9 @@
 
 
 <div class="button-container">
-    <button onclick="back()">Torna ad oggi</button>
+    <button onclick="back('<?=$back?>')">Torna indietro </button>
 </div>
-<h2>Lista di tutti i giorni:</h2>
+<h2>Lista di tutti i giorni <?=$titolo?>:</h2>
 <h3 style="text-align: center;">Premi per la riga della tabella per visualizzare le informazioni dei giorni</h3>
 <table>
 <thead>
@@ -151,16 +151,16 @@
 </thead>
 <?php foreach($giorni as $giorno) : ?>
 
-<tr onclick="change(<?=$giorno['ID']?>)" >
+<tr onclick="change( <?=$giorno['ID']?> , '<?=$azione?>' )" >
     <td><?=$giorno['giorno']?></td>
     <td><?=$giorno['inizio_turno']?></td>
     <td><?=$giorno['fine_turno']?></td>
-    <td>
-       <!--  <form method="post" action="index.php?action=erase" style="display: inline-block">
+    <!--<td>
+         <form method="post" action="index.php?action=erase" style="display: inline-block">
             <button>cancella</button>
             <input type="hidden" value="" name="erase">
-        </form> -->
-    </td>
+        </form> 
+    </td>-->
 </tr>
 <?php endforeach; ?>
 </table>
@@ -170,11 +170,11 @@
 function logout(){
 window.location.href='index.php?action=logout'
 }
-function back(){
-    window.location.href='index.php'
+function back(back){
+    window.location.href=back
 }
-function change(value){
-    window.location.href='index.php?action=open&id='+value
+function change( value , action){
+    window.location.href='index.php?action='+ action +'&id='+ value
 
 }
 </script>

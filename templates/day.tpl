@@ -152,9 +152,9 @@
     </div>
 </header>
 <div class="button-container">
-    <button onclick="back()">Torna alla lista</button>
+    <button onclick="back('<?=$back?>')">Torna alla lista</button>
 </div>
-<h2>Dettagli giorno</h2>
+<h2>Dettagli giorno <?=$titolo?> </h2>
 <div class="details-container">
     <div class="detail-item">
         <h3>Giorno:</h3>
@@ -190,8 +190,8 @@
     function logout() {
         window.location.href = 'index.php?action=logout';
     }
-    function back() {
-        window.location.href = 'index.php?action=all';
+    function back(back) {
+        window.location.href = back
     }
 </script>
 </body>

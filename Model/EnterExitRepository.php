@@ -13,7 +13,7 @@ class EnterExitRepository
     {
         date_default_timezone_set('Europe/Rome');
         $user = Authenticator::getUser();
-        $giorno = DayRepository::get_giornoUtente();
+        $giorno = DayRepository::get_giornoUtente($user);
         $pdo = Connection::getInstance();
         $ora = date("H:i:s");
         $sql = 'INSERT INTO Entrata (orario_entrata) VALUES (:entrata)';
@@ -43,7 +43,7 @@ class EnterExitRepository
     {
         date_default_timezone_set('Europe/Rome');
         $user = Authenticator::getUser();
-        $giorno = DayRepository::get_giornoUtente();
+        $giorno = DayRepository::get_giornoUtente($user);
         $pdo = Connection::getInstance();
         $ora = date("H:i:s");
         $sql = 'INSERT INTO Uscita (orario_uscita, id_giorno, motivo) VALUES ( :ora , :id , :motivo)';

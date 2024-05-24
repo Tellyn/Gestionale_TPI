@@ -67,4 +67,17 @@ class UserRepository{
         else
             return $row = $stmt->fetchAll();
     }
+    public static function getUserByid($id){
+        $pdo = Connection::getInstance();
+        $sql = 'SELECT * FROM utente WHERE ID=:id';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+                'id' => $id
+            ]
+        );
+        if($stmt->rowCount() == 0)
+            return null;
+        else
+            return $row = $stmt->fetch();
+    }
 }

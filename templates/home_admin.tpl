@@ -139,21 +139,21 @@
 <?php else : ?>
 <?php foreach($giorni as $giorno) : ?>
 
-    <h2><?=$giorno['nome']?></h2>
+    <h2><?=$giorno['nome']?> <?=$giorno['cognome']?> </h2>
     <table>
     <thead>
-    <tr><th>Giorno</th><th>Inizio turno</th><th>Fine turno</th><th>cancella</th></tr>
+    <tr><th>Giorno</th><th>Inizio turno</th><th>Fine turno</th></tr>
     </thead>
-    <tr>
+    <tr onclick="cambia(<?=$giorno['id_utente']?>)">
     <td><?=$giorno['giorno']?></td>
     <td><?=$giorno['inizio_turno']?></td>
     <td><?=$giorno['fine_turno']?></td>
-    <td>
-       <!--  <form method="post" action="index.php?action=erase" style="display: inline-block">
+    <!--<td>
+         <form method="post" action="index.php?action=erase" style="display: inline-block">
             <button>cancella</button>
             <input type="hidden" value="" name="erase">
-        </form> -->
-    </td>
+        </form> 
+    </td>-->
 </tr>
 
 </table>
@@ -168,6 +168,9 @@
     }
     function user(){
         window.location.href='index.php?action=alluser'
+    }
+    function cambia(id){
+        window.location.href='index.php?action=giornohome&id='+id
     }
 </script>
 <script>

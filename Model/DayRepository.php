@@ -7,9 +7,9 @@ class DayRepository
 {
     public static function insert_giorno(){
         date_default_timezone_set('Europe/Rome');
-        if(self::get_giornoUtente()){
-        $pdo = Connection::getInstance();
         $user=Authenticator::getUser();
+        if(self::get_giornoUtente($user)===true){
+        $pdo = Connection::getInstance();
         $giorno=date("Y-m-d");
         $sql = 'INSERT INTO Giorno (giorno,id_utente,inizio_turno,fine_turno) VALUES ( :giorno, :id , :inizio , :fine )  ';
         $stmt = $pdo->prepare($sql);
@@ -22,9 +22,8 @@ class DayRepository
         );
         }
     }
-    public static function get_giornoUtente(){
+    public static function get_giornoUtente($user){
         date_default_timezone_set('Europe/Rome');
-        $user=Authenticator::getUser();
         $pdo = Connection::getInstance();
         $giorno=date("Y-m-d");
         $sql = 'SELECT * FROM Giorno WHERE giorno=:giorno  AND id_utente= :utente';
@@ -69,8 +68,7 @@ public static function get_giorni_today(){
     $result=$stmt->fetchAll();
     return $result;
 }
-public static function get_giorniUtente() {
-        $user=Authenticator::getUser();
+public static function get_giorniUtente($user) {
         $pdo = Connection::getInstance();
         $sql = 'SELECT * FROM giorno WHERE id_utente = :id_utente ORDER BY giorno DESC';
         $stmt = $pdo->prepare($sql);
@@ -84,13 +82,11 @@ public static function get_giorniUtente() {
         return $result;
 }
 public static function get_giornoById(string $giorno){
-        $user=Authenticator::getUser();
         $pdo = Connection::getInstance();
-        $sql = 'SELECT * FROM Giorno WHERE ID=:giorno  AND id_utente= :utente';
+        $sql = 'SELECT * FROM Giorno WHERE ID=:giorno';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
             'giorno'=>$giorno,
-            'utente'=>$user['ID']
             ]
         );
     
