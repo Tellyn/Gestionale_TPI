@@ -21,6 +21,7 @@
             padding: 10px;
             background-color: #007bff; /* Blu */
             color: white;
+            position: relative;
         }
         header a {
             text-decoration: none;
@@ -42,6 +43,11 @@
         }
         .logout-button i {
             margin-right: 5px;
+        }
+        .home-icon {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
         }
         .button-container {
             text-align: center; /* Centra il pulsante "Aggiungi" */
@@ -102,7 +108,6 @@
             color: #333;
             text-align: center;
             margin-top: 40px;
-            margin-top: 40px;
         }
         h2{
             align-items: center;
@@ -114,6 +119,9 @@
 <body>
 <header>
     <h1> Buongiorno <?=$_SESSION['user']['nome']?></h1>
+    <a href="index.php">
+    <i class="fas fa-home home-icon" onclick=""></i>
+    </a>
     <div class="logout-button">
         <button onclick='logout()'><i class="fas fa-sign-out-alt"></i>Logout</button>
     </div>

@@ -15,13 +15,20 @@
             background-color: #f2f2f2;
         }
         header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between; /* Spazio tra gli elementi */
-            padding: 10px;
-            background-color: #007bff; /* Blu */
-            color: white;
-        }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    position: relative;
+}
+.home-icon {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
         header a {
             text-decoration: none;
             color: white;
@@ -122,7 +129,9 @@
 <body>
 <header>
     <h1> Buongiorno <?=$_SESSION['user']['nome']?></h1>
-    <div class="logout-button">
+    <a href="index.php">
+    <i class="fas fa-home home-icon" onclick=""></i>
+    </a>    <div class="logout-button">
         <button onclick='logout()'><i class="fas fa-sign-out-alt"></i>Logout</button>
     </div>
 </header>

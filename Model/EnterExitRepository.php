@@ -74,7 +74,7 @@ class EnterExitRepository
             return null;
 
         $last=$stmt->fetch();
-        if($giorno===true){
+        if($giorno===  true){
             return null;
         }
         if($giorno['ID']!=$last['Day']){
